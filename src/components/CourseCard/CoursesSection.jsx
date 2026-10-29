@@ -52,8 +52,11 @@ export default function CoursesSection() {
 
     const onSearchSubmit = (e) => {
         e.preventDefault();
-        setPage(1);
-        fetchCourses();
+        if (page === 1) {
+            fetchCourses();
+        } else {
+            setPage(1);
+        }
     };
 
     // reset page when filters change
@@ -63,12 +66,15 @@ export default function CoursesSection() {
 
     return (
         <div className="space-y-6">
-
             <CoursesFilters
-                search={search} setSearch={setSearch}
-                sort={sort} setSort={setSort}
-                category={category} setCategory={setCategory}
-                tags={tags} setTags={setTags}
+                search={search}
+                setSearch={setSearch}
+                sort={sort}
+                setSort={setSort}
+                category={category}
+                setCategory={setCategory}
+                tags={tags}
+                setTags={setTags}
                 onSearchSubmit={onSearchSubmit}
             />
 
@@ -95,7 +101,6 @@ export default function CoursesSection() {
                     </p>
                 </div>
             )}
-
 
             {!loading && !error && courses.length > 0 && (
                 <>
